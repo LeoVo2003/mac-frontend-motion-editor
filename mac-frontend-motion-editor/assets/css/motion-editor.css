@@ -1,0 +1,36 @@
+#mfme-editor { --mfme-accent: #9bf5c5; font: 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; color: #e9edf5; text-align: left; direction: ltr; }
+#mfme-editor *, #mfme-editor *::before, #mfme-editor *::after { box-sizing: border-box; }
+#mfme-editor [hidden] { display: none !important; }
+#mfme-editor button, #mfme-editor select, #mfme-editor input { font: inherit; letter-spacing: normal; text-transform: none; box-shadow: none; border-radius: 7px; border: 1px solid #414b5e; background: #252e40; color: #eef2fa; padding: 8px 10px; margin: 0; min-height: 36px; width: auto; cursor: pointer; }
+#mfme-editor button:hover { background: #35425a; }
+#mfme-editor button:disabled { opacity: .45; cursor: default; }
+#mfme-editor :focus-visible { outline: 2px solid var(--mfme-accent); outline-offset: 3px; }
+#mfme-editor a { color: var(--mfme-accent); text-decoration: underline; }
+#mfme-editor .mfme-toolbar { position: fixed; z-index: 999990; bottom: 20px; left: 20px; max-width: calc(100vw - 40px); display: flex; flex-wrap: wrap; align-items: center; gap: 16px; padding: 12px 18px; background: #172033; border: 1px solid #414b5e; border-radius: 12px; box-shadow: 0 8px 30px #0004; }
+#mfme-editor .mfme-toolbar strong { color: var(--mfme-accent); }
+#mfme-editor .mfme-outline { position: fixed; pointer-events: none; z-index: 999988; border: 2px solid #39cf91; border-radius: 3px; }
+#mfme-editor .mfme-chip { position: absolute; pointer-events: auto; top: 0; left: 0; white-space: nowrap; border-radius: 0 0 7px 0; border-color: #39cf91; background: #14392b; font-size: 12px; padding: 3px 8px; min-height: 28px; }
+#mfme-editor .mfme-panel { position: fixed; z-index: 999991; top: 48px; right: 16px; width: 340px; max-width: calc(100vw - 32px); max-height: calc(100dvh - 130px); overflow: auto; overscroll-behavior: contain; padding: 20px; background: #172033; border: 1px solid #414b5e; border-radius: 14px; box-shadow: 0 16px 60px #0006; }
+#mfme-editor header { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; margin-bottom: 16px; }
+#mfme-editor h2 { color: #fff; font: 600 23px/1.3 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; margin: 3px 0 0; }
+#mfme-editor small { color: var(--mfme-accent); font-size: 10px; letter-spacing: 1.2px; }
+#mfme-editor p { margin: 12px 0; font: inherit; }
+#mfme-editor .mfme-label { overflow-wrap: anywhere; color: #bfcbe0; }
+#mfme-editor fieldset { border: 0; padding: 0; margin: 20px 0 12px; min-width: 0; }
+#mfme-editor legend { padding: 0; margin: 0 0 6px; font-size: 12px; color: #bfcbe0; }
+#mfme-editor .mfme-devices { display: flex; gap: 4px; }
+#mfme-editor .mfme-devices button { flex: 1; font-size: 12px; }
+#mfme-editor [aria-pressed="true"] { border-color: var(--mfme-accent); color: var(--mfme-accent); background: #203d39; }
+#mfme-editor label { display: block; margin: 14px 0 7px; font-size: 12px; color: #bfcbe0; }
+#mfme-editor select, #mfme-editor input { display: block; width: 100%; margin-top: 6px; }
+#mfme-editor .mfme-presets { display: flex; gap: 5px; }
+#mfme-editor .mfme-presets button { flex: 1; padding: 4px; font-size: 12px; }
+#mfme-editor .mfme-note, #mfme-editor details { font-size: 12px; color: #aebbd0; }
+#mfme-editor .mfme-warning { padding: 10px; background: #493d20; border-radius: 6px; color: #ffdc88; font-size: 12px; }
+#mfme-editor .mfme-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 18px; }
+#mfme-editor .mfme-primary { background: var(--mfme-accent); color: #142b22; border-color: var(--mfme-accent); font-weight: 700; }
+#mfme-editor .mfme-primary:hover { background: #b9ffda; }
+#mfme-editor .mfme-status { min-height: 21px; color: var(--mfme-accent); }
+#mfme-editor .mfme-error { color: #ffadad; }
+#mfme-editor summary { cursor: pointer; }
+@media (max-width: 600px) { #mfme-editor .mfme-toolbar { bottom: 8px; left: 8px; max-width: calc(100vw - 16px); gap: 8px; font-size: 12px; padding: 9px 12px; } #mfme-editor .mfme-panel { right: 8px; top: 54px; max-width: calc(100vw - 16px); } }

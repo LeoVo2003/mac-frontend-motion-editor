@@ -1,0 +1,6 @@
+{
+  "name": "mac-frontend-motion-editor-checks",
+  "private": true,
+  "scripts": { "test": "node tests/check.cjs" },
+  "devDependencies": { "php-parser": "3.7.0", "playwright": "1.61.1" }
+}

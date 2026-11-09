@@ -1,0 +1,59 @@
+name: Test and release WordPress plugin
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: wordpress-release
+  cancel-in-progress: true
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '7.4'
+          coverage: none
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - run: npm test
+      - run: php tests/backend.php
+      - run: php tests/updater.php
+      - run: find mac-frontend-motion-editor -name '*.php' -print0 | xargs -0 -n1 php -l
+  release:
+    needs: test
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Build installable plugin and update metadata
+        id: build
+        run: node scripts/build-release.cjs
+      - name: Publish complete release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_TAG: ${{ steps.build.outputs.tag }}
+          RELEASE_VERSION: ${{ steps.build.outputs.version }}
+        run: |
+          current=$(gh api "repos/$GITHUB_REPOSITORY/commits/main" --jq .sha)
+          if [ "$current" != "$GITHUB_SHA" ]; then
+            echo 'Skipping superseded commit.'
+            exit 0
+          fi
+          gh release create "$RELEASE_TAG" dist/mac-frontend-motion-editor.zip dist/update.json --draft --target "$GITHUB_SHA" --title "MAC Motion $RELEASE_VERSION" --notes "Built and tested from $GITHUB_SHA. Install the plugin ZIP once; subsequent releases appear through Check updates in WordPress."
+          gh release edit "$RELEASE_TAG" --draft=false --latest

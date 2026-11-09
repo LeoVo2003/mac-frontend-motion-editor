@@ -30,7 +30,7 @@ expect( false === MFME_Updater::update( false, [], 'another/plugin.php', [] ), '
 expect( $release === MFME_Updater::update( false, [], plugin_basename( MFME_FILE ), [] ), 'WordPress update hook returns matching plugin only' );
 $info = MFME_Updater::information( false, 'plugin_information', (object) [ 'slug' => 'mac-frontend-motion-editor' ] );
 expect( $release['package'] === $info->download_link, 'plugin details point to same immutable package' );
-foreach ( [ 'https://evil.example/plugin.zip', 'http://github.com/LeoVo2003/mac-frontend-motion-editor/releases/download/v1/mac-frontend-motion-editor.zip', 'https://github.com/someone/other/releases/download/v1/mac-frontend-motion-editor.zip', 'https://github.com/LeoVo2003/mac-frontend-motion-editor/releases/download/../mac-frontend-motion-editor.zip?token=secret' ] as $url ) {
+foreach ( [ 'https://evil.example/plugin.zip', 'http://github.com/LeoVo2003/mac-frontend-motion-editor/releases/download/v1/mac-frontend-motion-editor.zip', 'https://github.com/someone/other/releases/download/v1/mac-frontend-motion-editor.zip', 'https://github.com/LeoVo2003/mac-frontend-motion-editor/releases/download/../mac-frontend-motion-editor.zip', 'https://github.com/LeoVo2003/mac-frontend-motion-editor/releases/download/v9.9.9/mac-frontend-motion-editor.zip' ] as $url ) {
 	$cache = []; $payload['package'] = $url;
 	expect( false === MFME_Updater::release(), 'reject foreign or malformed package' );
 }

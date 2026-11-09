@@ -26,7 +26,7 @@ class MFME_Updater {
 			return false;
 		}
 		$data = json_decode( wp_remote_retrieve_body( $response ), true );
-		if ( ! is_array( $data ) || ! isset( $data['version'], $data['package'] ) || ! is_string( $data['version'] ) || ! preg_match( '/^\d+\.\d+\.\d+(?:\.\d+)?$/D', $data['version'] ) || ! is_string( $data['package'] ) || ! preg_match( '#^https://github\.com/LeoVo2003/mac-frontend-motion-editor/releases/download/[a-zA-Z0-9._-]+/mac-frontend-motion-editor\.zip$#D', $data['package'] ) ) {
+		if ( ! is_array( $data ) || ! isset( $data['version'], $data['package'] ) || ! is_string( $data['version'] ) || ! preg_match( '/^\d+\.\d+\.\d+(?:\.\d+)?$/D', $data['version'] ) || self::REPO_URL . '/releases/download/v' . $data['version'] . '/mac-frontend-motion-editor.zip' !== $data['package'] ) {
 			set_transient( self::CACHE_KEY, 'unavailable', 120 );
 			return false;
 		}
